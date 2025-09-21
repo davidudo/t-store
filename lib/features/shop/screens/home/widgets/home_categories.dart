@@ -9,16 +9,56 @@ class THomeCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> categories = [
+      {
+        'title': 'Sports',
+        'image': TImages.sportIcon,
+      },
+      {
+        'title': 'Clothing',
+        'image': TImages.clothIcon,
+      },
+      {
+        'title': 'Shoes',
+        'image': TImages.shoeIcon,
+      },
+      {
+        'title': 'Cosmetics',
+        'image': TImages.cosmeticsIcon,
+      },
+      {
+        'title': 'Pets',
+        'image': TImages.animalIcon,
+      },
+      {
+        'title': 'Toys',
+        'image': TImages.toyIcon,
+      },
+      {
+        'title': 'Furniture',
+        'image': TImages.furnitureIcon,
+      },
+      {
+        'title': 'Jewelery',
+        'image': TImages.jeweleryIcon,
+      },
+      {
+        'title': 'Electronics',
+        'image': TImages.electronicsIcon,
+      },
+    ];
+
     return SizedBox(
       height: 80,
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: 6,
+        itemCount: categories.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (_, index) {
+          final category = categories[index];
           return TVerticalImageText(
-            title: 'Shoes',
-            image: TImages.shoeIcon,
+            title: category['title'],
+            image: category['image'],
             onTap: () {},
           );
         },

@@ -32,7 +32,7 @@ class TVerticalImageText extends StatelessWidget {
             Container(
               width: 54,
               height: 54,
-              padding: const EdgeInsets.all(TSizes.sm),
+              padding: const EdgeInsets.all(TSizes.sm + 4),
               decoration: BoxDecoration(
                 color: backgroundColor ??
                     (THelperFunctions.isDarkMode(context)
