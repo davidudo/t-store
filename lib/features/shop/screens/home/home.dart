@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/search_container.dart';
+import 'package:t_store/common/widgets/layouts/grid_layout.dart';
+import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_app_bar.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_categories.dart';
@@ -23,6 +25,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   /// AppBar
                   THomeAppBar(),
+                  SizedBox(height: TSizes.spaceBtwItems),
 
                   /// Searchbar
                   TSearchContainer(
@@ -58,16 +61,25 @@ class HomeScreen extends StatelessWidget {
             /// Body
             Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: TSizes.defaultSpace,
-                horizontal: TSizes.sm,
+                vertical: TSizes.sm,
+                horizontal: TSizes.defaultSpace,
               ),
-              child: TPromoSlider(
-                banners: [
-                  TImages.promoBanner1,
-                  TImages.promoBanner2,
-                  TImages.promoBanner3,
-                ],
-              ),
+              child: Column(children: [
+                TPromoSlider(
+                  banners: [
+                    TImages.promoBanner1,
+                    TImages.promoBanner2,
+                    TImages.promoBanner3,
+                  ],
+                ),
+                SizedBox(height: TSizes.defaultSpace),
+
+                /// Popular Products
+                TGridLayout(
+                    itemCount: 4,
+                    itemBuilder: (_, index) => TProductCardVertical()),
+                SizedBox(height: TSizes.defaultSpace),
+              ]),
             )
           ],
         ),

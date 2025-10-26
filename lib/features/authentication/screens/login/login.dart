@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/common/styles/spacing_styles.dart';
+import 'package:t_store/common/styles/spacing.dart';
 import 'package:t_store/common/widgets/authentication/form_divider.dart';
 import 'package:t_store/common/widgets/authentication/social_buttons.dart';
 import 'package:t_store/features/authentication/screens/login/widgets/login_form.dart';

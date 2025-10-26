@@ -22,11 +22,27 @@ class TPromoSlider extends StatelessWidget {
     return Column(
       children: [
         CarouselSlider(
-          items: banners.map((url) => TRoundedImage(imageUrl: url)).toList(),
+          items: banners
+              .map((url) => SizedBox(
+                    width: double.infinity,
+                    child: ClipRect(
+                      child: TRoundedImage(
+                        imageUrl: url,
+                        applyImageRadius: true,
+                        width: double.infinity,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ))
+              .toList(),
           options: CarouselOptions(
-              viewportFraction: 1,
-              onPageChanged: (index, _) =>
-                  controller.updatePageIndicator(index)),
+            viewportFraction: 1,
+            onPageChanged: (index, _) => controller.updatePageIndicator(index),
+            autoPlay: true,
+            aspectRatio: 16 / 9,
+            enlargeCenterPage: false,
+          ),
         ),
         const SizedBox(height: TSizes.spaceBtwItems),
         Center(
@@ -38,7 +54,7 @@ class TPromoSlider extends StatelessWidget {
                   TCircularContainer(
                     width: 20,
                     height: 4,
-                    margin: EdgeInsets.only(right: 10),
+                    margin: const EdgeInsets.only(right: 10),
                     backgroundColor: controller.carousalCurrentIndex.value == i
                         ? TColors.primary
                         : TColors.grey,
