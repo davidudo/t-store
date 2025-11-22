@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/styles/shadows.dart';
+import 'package:t_store/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:t_store/common/widgets/icons/plain_icon.dart';
 import 'package:t_store/common/widgets/images/rounded_image.dart';
@@ -43,7 +44,7 @@ class TProductCardVertical extends StatelessWidget {
           children: [
             /// Thumbnail, Wishlist & Discount Tag
             TRoundedContainer(
-              height: 180,
+              height: 160,
               width: double.infinity,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: dark ? TColors.dark : TColors.light,
@@ -109,21 +110,8 @@ class TProductCardVertical extends StatelessWidget {
                           smallSize: true,
                         ),
                         SizedBox(height: TSizes.spaceBtwItems / 4),
-                        Row(
-                          children: [
-                            Text(
-                              product['brand'] ?? '',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                            const SizedBox(width: TSizes.xs),
-                            const Icon(
-                              Iconsax.verify5,
-                              color: TColors.primary,
-                              size: TSizes.iconXs,
-                            )
-                          ],
+                        TBrandTitleTextWithVerifiedIcon(
+                          title: product['brand'],
                         ),
                       ],
                     ),

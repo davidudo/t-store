@@ -115,8 +115,8 @@ class HomeScreen extends StatelessWidget {
                 /// Popular Products
                 TSectionHeading(
                   title: TTexts.popularProducts,
-                  showActionButton: true,
                   textColor: dark ? TColors.light : TColors.dark,
+                  onPressed: () {},
                 ),
                 SizedBox(height: TSizes.defaultSpace),
 
