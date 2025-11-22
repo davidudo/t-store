@@ -15,18 +15,26 @@ class TGridLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: itemCount,
+    return CustomScrollView(
       shrinkWrap: true,
-      padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: TSizes.gridViewSpacing,
-        crossAxisSpacing: TSizes.gridViewSpacing,
-        mainAxisExtent: mainAxisExtent,
-      ),
-      itemBuilder: itemBuilder,
+      slivers: [
+        SliverPadding(
+          padding: EdgeInsets.zero,
+          sliver: SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: TSizes.gridViewSpacing,
+              crossAxisSpacing: TSizes.gridViewSpacing,
+              mainAxisExtent: mainAxisExtent,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              itemBuilder,
+              childCount: itemCount,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

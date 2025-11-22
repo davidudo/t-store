@@ -8,14 +8,52 @@ import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_app_bar.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_promo_slider.dart';
+import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+
+    final List<Map<String, dynamic>> products = [
+      {
+        'title': 'Green Nike Air Shoes',
+        'brand': 'Nike',
+        'image': TImages.productImage1,
+        'priceRange': {'min': 120, 'max': 180},
+        'hasDiscount': false,
+      },
+      {
+        'title': 'Blue T-shirt for All Ages',
+        'brand': 'Zara',
+        'image': TImages.productImage55,
+        'price': 29.99,
+        'hasDiscount': false,
+      },
+      {
+        'title': '4 Color Collar T-shirt Dry Fit',
+        'brand': 'Zara',
+        'image': TImages.productImage60,
+        'price': 24.99,
+        'originalPrice': 34.99,
+        'discountPercent': 29,
+        'hasDiscount': true,
+      },
+      {
+        'title': 'Leather Brown Jacket',
+        'brand': 'Zara',
+        'image': TImages.productImage64,
+        'priceRange': {'min': 199, 'max': 299},
+        'hasDiscount': false,
+      },
+    ];
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -44,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         /// Section Heading
                         TSectionHeading(
-                          title: 'Popular Categories',
+                          title: TTexts.popularCategories,
                           showActionButton: false,
                         ),
                         SizedBox(height: TSizes.defaultSpace),
@@ -72,12 +110,23 @@ class HomeScreen extends StatelessWidget {
                     TImages.promoBanner3,
                   ],
                 ),
-                SizedBox(height: TSizes.defaultSpace),
+                SizedBox(height: TSizes.spaceBtwSections),
 
                 /// Popular Products
+                TSectionHeading(
+                  title: TTexts.popularProducts,
+                  showActionButton: true,
+                  textColor: dark ? TColors.light : TColors.dark,
+                ),
+                SizedBox(height: TSizes.defaultSpace),
+
                 TGridLayout(
-                    itemCount: 4,
-                    itemBuilder: (_, index) => TProductCardVertical()),
+                  itemCount: 4,
+                  itemBuilder: (_, index) => TProductCardVertical(
+                    product: products[index],
+                    onTap: () {},
+                  ),
+                ),
                 SizedBox(height: TSizes.defaultSpace),
               ]),
             )

@@ -65,6 +65,7 @@ class TTexts {
       "Welcome to Your Ultimate Shopping Destination: Your Account is Created, Unleash the Joy of Seamless Online Shopping!";
 
   // Product
+  static const String popularCategories = "Popular Categories";
   static const String popularProducts = "Popular Products";
 
   // Home
