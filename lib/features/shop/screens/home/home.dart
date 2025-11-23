@@ -63,14 +63,14 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   /// AppBar
                   THomeAppBar(),
-                  SizedBox(height: TSizes.spaceBtwItems),
+                  const SizedBox(height: TSizes.spaceBtwItems),
 
                   /// Searchbar
                   TSearchContainer(
                     text: "Search in store",
                     icon: Iconsax.search_normal,
                   ),
-                  SizedBox(height: TSizes.defaultSpace),
+                  const SizedBox(height: TSizes.defaultSpace),
 
                   /// Categories
                   Padding(
@@ -84,6 +84,7 @@ class HomeScreen extends StatelessWidget {
                         TSectionHeading(
                           title: TTexts.popularCategories,
                           showActionButton: false,
+                          textColor: TColors.white,
                         ),
                         SizedBox(height: TSizes.defaultSpace),
 
@@ -110,15 +111,12 @@ class HomeScreen extends StatelessWidget {
                     TImages.promoBanner3,
                   ],
                 ),
-                SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: TSizes.spaceBtwSections),
 
                 /// Popular Products
                 TSectionHeading(
-                  title: TTexts.popularProducts,
-                  textColor: dark ? TColors.light : TColors.dark,
-                  onPressed: () {},
-                ),
-                SizedBox(height: TSizes.defaultSpace),
+                    title: TTexts.popularProducts, onPressed: () {}),
+                const SizedBox(height: TSizes.defaultSpace),
 
                 TGridLayout(
                   itemCount: 4,
@@ -127,7 +125,7 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {},
                   ),
                 ),
-                SizedBox(height: TSizes.defaultSpace),
+                const SizedBox(height: TSizes.defaultSpace),
               ]),
             )
           ],

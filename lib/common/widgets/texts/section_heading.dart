@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/utils/constants/colors.dart';
 
 class TSectionHeading extends StatelessWidget {
   const TSectionHeading({
     super.key,
     required this.title,
     this.onPressed,
-    this.textColor = TColors.white,
+    this.textColor,
     this.showActionButton = true,
     this.buttonTitle = 'View all',
   });

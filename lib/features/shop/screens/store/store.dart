@@ -58,10 +58,7 @@ class StoreScreen extends StatelessWidget {
 
                       /// Featured Brands
                       TSectionHeading(
-                        title: 'Featured Brands',
-                        textColor: dark ? TColors.light : TColors.dark,
-                        onPressed: () {},
-                      ),
+                          title: 'Featured Brands', onPressed: () {}),
                       const SizedBox(height: TSizes.spaceBtwItems),
 
                       TGridLayout(
