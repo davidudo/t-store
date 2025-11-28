@@ -41,33 +41,34 @@ class TBrandCards extends StatelessWidget {
             /// Icon
             Flexible(
               child: TCircularImage(
+                height: 45,
+                width: 45,
+                fit: BoxFit.contain,
                 image: image,
-                backgroundColor: Colors.transparent,
+                backgroundColor: dark ? TColors.darkGrey : TColors.softGrey,
               ),
             ),
-            const SizedBox(height: TSizes.spaceBtwItems / 2),
+            const SizedBox(width: TSizes.spaceBtwItems / 2),
 
             /// Text
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TBrandTitleTextWithVerifiedIcon(
-                    title: title,
-                    brandTextSize: TextSizes.large,
-                  ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems / 4,
-                  ),
-                  Text(
-                    '$itemCount products',
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.labelMedium,
-                  )
-                ],
-              ),
-            )
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TBrandTitleTextWithVerifiedIcon(
+                  title: title,
+                  brandTextSize: TextSizes.large,
+                ),
+                const SizedBox(
+                  height: TSizes.spaceBtwItems / 4,
+                ),
+                Text(
+                  '$itemCount products',
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelMedium,
+                )
+              ],
+            ),
           ],
         ),
       ),

@@ -57,7 +57,7 @@ class TCategoryTab extends StatelessWidget {
               /// Brands
               TBrandShowcase(
                 title: 'Nike',
-                brandImage: TImages.clothIcon,
+                brandImage: TImages.nikeLogo,
                 itemCount: 253,
                 images: [
                   TImages.productImage3,
@@ -66,13 +66,13 @@ class TCategoryTab extends StatelessWidget {
                 ],
               ),
               TBrandShowcase(
-                title: 'Nike',
-                brandImage: TImages.clothIcon,
-                itemCount: 253,
+                title: 'Zara',
+                brandImage: TImages.zaraLogo,
+                itemCount: 20,
                 images: [
-                  TImages.productImage3,
-                  TImages.productImage2,
-                  TImages.productImage1,
+                  TImages.productImage4,
+                  TImages.productImage5,
+                  TImages.productImage6,
                 ],
               ),
               const SizedBox(height: TSizes.spaceBtwItems),

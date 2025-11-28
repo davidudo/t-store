@@ -20,6 +20,29 @@ class StoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
 
+    final List<Map<String, dynamic>> brands = [
+      {
+        'title': 'Nike',
+        'itemCount': 20,
+        'image': TImages.nikeLogo,
+      },
+      {
+        'title': 'Zara',
+        'itemCount': 220,
+        'image': TImages.zaraLogo,
+      },
+      {
+        'title': 'Acer',
+        'itemCount': 5,
+        'image': TImages.acerLogo,
+      },
+      {
+        'title': 'Kenwood',
+        'itemCount': 18,
+        'image': TImages.kenwoodLogo,
+      },
+    ];
+
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -28,7 +51,12 @@ class StoreScreen extends StatelessWidget {
             'Store',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          actions: [TCartCounterIcon(onPressed: () {})],
+          actions: [
+            TCartCounterIcon(
+              onPressed: () {},
+              iconColor: dark ? TColors.white : TColors.black,
+            )
+          ],
         ),
         body: NestedScrollView(
           headerSliverBuilder: (_, innerBoxIsScrolled) {
@@ -66,9 +94,9 @@ class StoreScreen extends StatelessWidget {
                         itemCount: 4,
                         itemBuilder: (_, index) {
                           return TBrandCards(
-                            title: 'Nike',
-                            image: TImages.clothIcon,
-                            itemCount: 256,
+                            title: brands[index]['title'],
+                            image: brands[index]['image'],
+                            itemCount: brands[index]['itemCount'],
                             showBorder: true,
                           );
                         },
