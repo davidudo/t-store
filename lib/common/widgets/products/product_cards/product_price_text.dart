@@ -6,6 +6,7 @@ class TProductPriceText extends StatelessWidget {
     required this.price,
     this.currencySign = '\$',
     this.maxLines = 1,
+    this.isSmall = false,
     this.isLarge = false,
     this.lineThrough = false,
   });
@@ -13,6 +14,7 @@ class TProductPriceText extends StatelessWidget {
   final String price;
   final String currencySign;
   final int maxLines;
+  final bool isSmall;
   final bool isLarge;
   final bool lineThrough;
 
