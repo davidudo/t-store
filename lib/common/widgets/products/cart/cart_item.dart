@@ -14,6 +14,8 @@ class TCartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+
     return Row(
       children: [
         /// Image
@@ -22,9 +24,7 @@ class TCartItem extends StatelessWidget {
           width: 60,
           height: 60,
           padding: EdgeInsets.all(TSizes.sm),
-          backgroundColor: THelperFunctions.isDarkMode(context)
-              ? TColors.darkerGrey
-              : TColors.light,
+          backgroundColor: dark ? TColors.darkerGrey : TColors.light,
         ),
         const SizedBox(width: TSizes.spaceBtwItems),
 
@@ -54,15 +54,19 @@ class TCartItem extends StatelessWidget {
                     ),
                     TextSpan(
                       text: 'Red',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: dark ? TColors.white : TColors.black,
+                          ),
                     ),
                     TextSpan(
-                      text: ' | Size: ',
+                      text: '   Size: ',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     TextSpan(
                       text: 'UK 08',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: dark ? TColors.white : TColors.black,
+                          ),
                     ),
                   ],
                 ),
