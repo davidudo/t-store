@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:t_store/common/widgets/icons/circular_icon.dart';
+import 'package:t_store/common/widgets/icons/plain_icon.dart';
 import 'package:t_store/common/widgets/images/rounded_image.dart';
 import 'package:t_store/common/widgets/products/product_cards/product_price_text.dart';
 import 'package:t_store/common/widgets/texts/brand_title_text.dart';
@@ -20,7 +20,7 @@ class TProductCardHorizontal extends StatelessWidget {
 
     return Container(
       width: 310,
-      padding: const EdgeInsets.all(1),
+      padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(TSizes.productImageRadius),
         color: dark ? TColors.darkerGrey : TColors.lightContainer,
@@ -47,7 +47,7 @@ class TProductCardHorizontal extends StatelessWidget {
 
                 /// Sale Tag
                 Positioned(
-                  top: 12,
+                  top: 0,
                   child: TRoundedContainer(
                     radius: TSizes.sm,
                     backgroundColor: TColors.secondary.withValues(alpha: 0.8),
@@ -66,15 +66,17 @@ class TProductCardHorizontal extends StatelessWidget {
                 const Positioned(
                   top: 0,
                   right: 0,
-                  child: TCircularIcon(icon: Iconsax.heart5, color: Colors.red),
+                  child: TPlainIcon(
+                    icon: Iconsax.heart5,
+                    color: TColors.darkGrey,
+                  ),
                 )
               ],
             ),
           ),
 
           /// Details
-          SizedBox(
-            width: 172,
+          Expanded(
             child: Padding(
               padding: EdgeInsets.only(top: TSizes.sm, left: TSizes.sm),
               child: Column(
