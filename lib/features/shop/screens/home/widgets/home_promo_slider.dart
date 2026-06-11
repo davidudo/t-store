@@ -23,16 +23,14 @@ class TPromoSlider extends StatelessWidget {
       children: [
         CarouselSlider(
           items: banners
-              .map((url) => SizedBox(
-                    width: double.infinity,
-                    child: ClipRect(
-                      child: TRoundedImage(
-                        imageUrl: url,
-                        applyImageRadius: true,
-                        width: double.infinity,
-                        height: 200,
-                        fit: BoxFit.cover,
-                      ),
+              .map((url) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
+                    child: TRoundedImage(
+                      imageUrl: url,
+                      applyImageRadius: true,
+                      width: double.infinity,
+                      height: 200,
+                      fit: BoxFit.cover,
                     ),
                   ))
               .toList(),
