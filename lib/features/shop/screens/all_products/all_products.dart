@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/app_bar/app_bar.dart';
-import 'package:t_store/common/widgets/layouts/grid_layout.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/features/shop/screens/all_products/widgets/sortable_products.dart';
 
 class AllProductsScreen extends StatelessWidget {
   const AllProductsScreen({super.key});
@@ -82,45 +80,7 @@ class AllProductsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: Column(
-            children: [
-              /// Dropdown
-              DropdownButtonFormField(
-                decoration:
-                    const InputDecoration(prefixIcon: Icon(Iconsax.sort)),
-                onChanged: (value) {},
-                items: [
-                  DropdownMenuItem(value: 'name', child: Text('Name')),
-                  DropdownMenuItem(
-                    value: 'price_low_high',
-                    child: Text('Price: Low to High'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'price_high_low',
-                    child: Text('Price: High to Low'),
-                  ),
-                  DropdownMenuItem(value: 'sales', child: Text('Sales')),
-                  DropdownMenuItem(
-                    value: 'newest',
-                    child: Text('Newest Arrivals'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'popularity',
-                    child: Text('Popularity'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: TSizes.defaultSpace),
-
-              /// Products
-              TGridLayout(
-                itemCount: 6,
-                itemBuilder: (_, index) =>
-                    TProductCardVertical(product: products[index]),
-              ),
-              const SizedBox(height: TSizes.defaultSpace),
-            ],
-          ),
+          child: TSortableProducts(products: products),
         ),
       ),
     );

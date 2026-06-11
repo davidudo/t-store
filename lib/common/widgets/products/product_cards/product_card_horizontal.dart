@@ -96,9 +96,13 @@ class TProductCardHorizontal extends StatelessWidget {
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       /// Pricing
-                      const Flexible(child: TProductPriceText(price: '256.0')),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: TSizes.xs / 2),
+                        child: const Flexible(child: TProductPriceText(price: '256.0')),
+                      ),
 
                       /// Add to Cart Button
                       Container(
