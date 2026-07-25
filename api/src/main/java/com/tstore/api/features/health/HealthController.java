@@ -1,6 +1,6 @@
-package com.tstore.api.controller;
+package com.tstore.api.features.health;
 
-import com.tstore.api.dto.ApiResponse;
+import com.tstore.api.shared.dto.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

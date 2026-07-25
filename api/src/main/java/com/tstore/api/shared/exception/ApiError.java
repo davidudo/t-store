@@ -1,4 +1,4 @@
-package com.tstore.api.exception;
+package com.tstore.api.shared.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

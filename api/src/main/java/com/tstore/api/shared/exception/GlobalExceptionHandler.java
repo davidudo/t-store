@@ -1,4 +1,4 @@
-package com.tstore.api.exception;
+package com.tstore.api.shared.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

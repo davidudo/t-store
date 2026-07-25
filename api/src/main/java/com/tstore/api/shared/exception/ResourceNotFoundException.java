@@ -1,4 +1,4 @@
-package com.tstore.api.exception;
+package com.tstore.api.shared.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 
