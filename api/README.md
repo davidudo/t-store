@@ -4,15 +4,15 @@ Spring Boot REST API backend for the T-Store e-commerce application.
 
 ## Tech Stack
 
-| Layer       | Technology                   |
-|-------------|------------------------------|
-| Framework   | Spring Boot 3.3.x            |
-| Language    | Java 21                      |
-| Security    | Spring Security + JWT (JJWT) |
-| Database    | PostgreSQL                   |
-| ORM         | Spring Data JPA / Hibernate  |
-| Build tool  | Maven (Maven Wrapper)        |
-| Testing     | JUnit 5 + H2 (in-memory)     |
+| Layer       | Technology                    |
+|-------------|-------------------------------|
+| Framework   | Spring Boot 3.3.x             |
+| Language    | Java 21                       |
+| Security    | Spring Security + JWT (JJWT)  |
+| Database    | Neo4j (graph database)        |
+| ORM         | Spring Data Neo4j             |
+| Build tool  | Maven (Maven Wrapper)         |
+| Testing     | JUnit 5 + Neo4j Test Harness  |
 
 ---
 
@@ -25,20 +25,21 @@ all code related to a feature lives together in one package.
 ```
 features/
   <feature>/
-    <Feature>Controller.java   ← REST endpoints
-    <Feature>Service.java      ← Business logic
-    <Feature>Repository.java   ← Data access (Spring Data)
-    <Feature>Entity.java       ← JPA entity / domain model
+    <Feature>Controller.java      ← REST endpoints
+    <Feature>Service.java         ← Business logic
+    <Feature>Repository.java      ← Spring Data Neo4j repository
+    <Feature>Node.java            ← @Node (graph node / domain model)
     dto/
-      <Feature>Request.java    ← Incoming request body
-      <Feature>Response.java   ← Outgoing response body
+      <Feature>Request.java       ← Incoming request body
+      <Feature>Response.java      ← Outgoing response body
     exception/
-      <Feature>Exception.java  ← Feature-specific exceptions (optional)
+      <Feature>Exception.java     ← Feature-specific exceptions (optional)
 ```
 
-> Each feature is self-contained. You can open a single folder and find
-> everything you need — no jumping between `controller/`, `service/`, and
-> `repository/` directories.
+> **Graph modelling note**: domain types are annotated with `@Node` (instead
+> of `@Entity`) and relationships are expressed using `@Relationship`.
+> Spring Data Neo4j repositories extend `Neo4jRepository<T, ID>` instead of
+> `JpaRepository`.
 
 ---
 
@@ -73,8 +74,8 @@ api/
     │   │       ├── auth/                      ← Registration, login, JWT issuance
     │   │       │   ├── AuthController.java
     │   │       │   ├── AuthService.java
-    │   │       │   ├── UserEntity.java
-    │   │       │   ├── UserRepository.java
+    │   │       │   ├── UserNode.java              ← @Node
+    │   │       │   ├── UserRepository.java        ← Neo4jRepository
     │   │       │   └── dto/
     │   │       │       ├── RegisterRequest.java
     │   │       │       ├── LoginRequest.java
@@ -83,8 +84,8 @@ api/
     │   │       ├── product/                   ← Product catalogue
     │   │       │   ├── ProductController.java
     │   │       │   ├── ProductService.java
-    │   │       │   ├── ProductEntity.java
-    │   │       │   ├── ProductRepository.java
+    │   │       │   ├── ProductNode.java            ← @Node
+    │   │       │   ├── ProductRepository.java      ← Neo4jRepository
     │   │       │   └── dto/
     │   │       │       ├── ProductRequest.java
     │   │       │       └── ProductResponse.java
@@ -92,8 +93,8 @@ api/
     │   │       ├── category/                  ← Product categories & subcategories
     │   │       │   ├── CategoryController.java
     │   │       │   ├── CategoryService.java
-    │   │       │   ├── CategoryEntity.java
-    │   │       │   ├── CategoryRepository.java
+    │   │       │   ├── CategoryNode.java           ← @Node
+    │   │       │   ├── CategoryRepository.java     ← Neo4jRepository
     │   │       │   └── dto/
     │   │       │       ├── CategoryRequest.java
     │   │       │       └── CategoryResponse.java
@@ -101,8 +102,8 @@ api/
     │   │       ├── cart/                      ← Shopping cart (per-user)
     │   │       │   ├── CartController.java
     │   │       │   ├── CartService.java
-    │   │       │   ├── CartEntity.java
-    │   │       │   ├── CartRepository.java
+    │   │       │   ├── CartNode.java               ← @Node
+    │   │       │   ├── CartRepository.java         ← Neo4jRepository
     │   │       │   └── dto/
     │   │       │       ├── CartRequest.java
     │   │       │       └── CartResponse.java
@@ -110,8 +111,8 @@ api/
     │   │       ├── order/                     ← Order placement & history
     │   │       │   ├── OrderController.java
     │   │       │   ├── OrderService.java
-    │   │       │   ├── OrderEntity.java
-    │   │       │   ├── OrderRepository.java
+    │   │       │   ├── OrderNode.java              ← @Node
+    │   │       │   ├── OrderRepository.java        ← Neo4jRepository
     │   │       │   └── dto/
     │   │       │       ├── OrderRequest.java
     │   │       │       └── OrderResponse.java
@@ -119,7 +120,7 @@ api/
     │   │       └── user/                      ← User profile & settings
     │   │           ├── UserController.java
     │   │           ├── UserService.java
-    │   │           ├── UserProfileRepository.java
+    │   │           ├── UserProfileRepository.java  ← Neo4jRepository
     │   │           └── dto/
     │   │               ├── UserProfileRequest.java
     │   │               └── UserProfileResponse.java
@@ -141,8 +142,8 @@ api/
 |------------------------|-----------------------------------------------|
 | REST controller        | `features/<feature>/<Feature>Controller.java` |
 | Business logic         | `features/<feature>/<Feature>Service.java`    |
-| JPA entity             | `features/<feature>/<Feature>Entity.java`     |
-| Spring Data repository | `features/<feature>/<Feature>Repository.java` |
+| Graph node (domain)    | `features/<feature>/<Feature>Node.java`       |
+| Neo4j repository       | `features/<feature>/<Feature>Repository.java` |
 | Request / response DTO | `features/<feature>/dto/`                     |
 | Feature-specific error | `features/<feature>/exception/` (optional)    |
 | Global config (beans)  | `config/`                                     |
@@ -155,15 +156,21 @@ api/
 ### Prerequisites
 
 - Java 21+
-- PostgreSQL 14+
+- Neo4j 5+ (Community or Enterprise)
 
-### 1. Configure the database
+### 1. Start Neo4j
 
-Create a PostgreSQL database:
+The quickest way is via Docker:
 
-```sql
-CREATE DATABASE tstore;
+```bash
+docker run \
+  --name tstore-neo4j \
+  -p 7474:7474 -p 7687:7687 \
+  -e NEO4J_AUTH=neo4j/password \
+  neo4j:5
 ```
+
+Or install Neo4j Desktop from https://neo4j.com/download/
 
 Update credentials in `src/main/resources/application.properties` if needed.
 
@@ -193,4 +200,5 @@ http://localhost:8080/api/v1
 ./mvnw test
 ```
 
-Tests use an H2 in-memory database — no PostgreSQL required.
+Tests use the **Neo4j Test Harness** (embedded Neo4j) — no running Neo4j
+instance is needed during testing.
