@@ -100,11 +100,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Neo4j embedded test harness -->
+        <!-- Neo4j embedded server harness -->
         <dependency>
             <groupId>org.neo4j.test</groupId>
             <artifactId>neo4j-harness</artifactId>
-            <scope>test</scope>
+            <version>5.26.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>

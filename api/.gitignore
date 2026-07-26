@@ -35,6 +35,8 @@ target/
 hs_err_pid*
 replay_pid*
 
-### Environment ###
+### Environment & Database ###
 .env
 .env.local
+data/
+
